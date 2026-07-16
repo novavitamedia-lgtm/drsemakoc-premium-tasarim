@@ -430,6 +430,23 @@
   .foot-base a { color: var(--text-inv-soft); text-decoration: none; }
   .foot-base a:hover { color: var(--brass-2); }
 
+  /* ============ STICKY WHATSAPP CTA ============ */
+  .wa-cta {
+    position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 60;
+    display: inline-flex; align-items: center; gap: .55rem;
+    background: var(--brass-2); color: var(--ink);
+    font-size: .92rem; font-weight: 600; text-decoration: none;
+    padding: .85rem 1.3rem; border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+  }
+  .wa-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0, 0, 0, .3); }
+  .wa-cta .ic { width: 1.2em; height: 1.2em; }
+  @media (max-width: 560px) {
+    .wa-cta { padding: .95rem; }
+    .wa-cta span { display: none; }
+  }
+
   /* ============ REVEAL ============ */
   .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
   .reveal.visible { opacity: 1; transform: none; }
@@ -621,6 +638,8 @@
     </div>
   </div>
 </footer>
+
+<a class="wa-cta" href="https://wa.me/905439136595" target="_blank" rel="noopener" aria-label="WhatsApp ile iletişime geçin"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /> </svg><span>WhatsApp</span></a>
 
 <script>
   (function () {
