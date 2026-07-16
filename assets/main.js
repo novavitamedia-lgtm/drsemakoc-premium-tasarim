@@ -98,3 +98,18 @@
     });
   });
 })();
+
+/* WA lead formları */
+(function () {
+  document.querySelectorAll('.wa-form').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ad = (f.querySelector('[name=ad]') || {}).value || '';
+      var tel = (f.querySelector('[name=tel]') || {}).value || '';
+      var sel = f.querySelector('[name=konu]');
+      var konu = sel ? sel.value : (f.getAttribute('data-konu') || 'Randevu');
+      var msg = 'Merhaba, ben ' + ad.trim() + '. ' + konu + ' hakkında bilgi ve randevu talep ediyorum. Telefon numaram: ' + tel.trim();
+      window.open('https://wa.me/905439136595?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+  });
+})();
