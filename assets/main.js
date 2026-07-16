@@ -124,3 +124,86 @@
     });
   });
 })();
+
+/* motion paketi */
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+
+  /* scroll ilerleme */
+  var bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  document.body.appendChild(bar);
+  var onScroll = function () {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* hero cursor ışıltısı */
+  var hero = document.querySelector('.hero3');
+  if (hero && window.matchMedia('(pointer: fine)').matches) {
+    var glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    hero.appendChild(glow);
+    hero.addEventListener('pointermove', function (e) {
+      var r = hero.getBoundingClientRect();
+      glow.style.left = (e.clientX - r.left) + 'px';
+      glow.style.top = (e.clientY - r.top) + 'px';
+    });
+  }
+
+  /* kelime kelime başlık reveal */
+  var h1 = document.querySelector('.hero3 h1');
+  if (h1 && !h1.dataset.split) {
+    h1.dataset.split = '1';
+    var wi = 0;
+    var splitNode = function (node) {
+      if (node.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(function (part) {
+          if (/^\s+$/.test(part) || part === '') { frag.appendChild(document.createTextNode(part)); return; }
+          var sp = document.createElement('span');
+          sp.className = 'w';
+          sp.style.setProperty('--wi', wi++);
+          sp.textContent = part;
+          frag.appendChild(sp);
+        });
+        node.parentNode.replaceChild(frag, node);
+      } else if (node.nodeType === 1) {
+        [].slice.call(node.childNodes).forEach(splitNode);
+      }
+    };
+    [].slice.call(h1.childNodes).forEach(splitNode);
+    h1.classList.remove('fade-rise-d1');
+    h1.style.animation = 'none';
+    h1.style.opacity = '1';
+    h1.style.transform = 'none';
+    h1.classList.add('word-reveal');
+  }
+
+  /* manyetik altın butonlar */
+  if (window.matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('.btn-gold').forEach(function (btn) {
+      btn.addEventListener('pointermove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width / 2) * 0.15;
+        var y = (e.clientY - r.top - r.height / 2) * 0.25;
+        btn.style.transform = 'translate(' + x + 'px, ' + (y - 2) + 'px)';
+      });
+      btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
+    });
+
+    /* 3D tilt kartlar */
+    document.querySelectorAll('.pcard, .svc').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var rx = ((e.clientY - r.top) / r.height - 0.5) * -5;
+        var ry = ((e.clientX - r.left) / r.width - 0.5) * 5;
+        card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-5px)';
+      });
+      card.addEventListener('pointerleave', function () { card.style.transform = ''; });
+    });
+  }
+})();

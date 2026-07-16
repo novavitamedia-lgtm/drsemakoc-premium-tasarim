@@ -831,3 +831,49 @@ section { scroll-margin-top: 90px; }
   .gallery-band { overflow-x: auto; }
 }
 @media (max-width: 700px) { .marquee-track img { height: 160px; } }
+
+/* ===== MOTION PAKETİ (motionsites esinli) ===== */
+/* scroll ilerleme çubuğu */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--brass), var(--brass-2));
+  z-index: 90; pointer-events: none;
+}
+
+/* hero cursor ışıltısı */
+.cursor-glow {
+  position: absolute; width: 520px; height: 520px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(214, 184, 121, .14) 0%, transparent 65%);
+  pointer-events: none; transform: translate(-50%, -50%); left: 50%; top: 40%;
+  transition: opacity .4s; z-index: 1;
+}
+@media (pointer: coarse) { .cursor-glow { display: none; } }
+
+/* kelime kelime başlık reveal */
+.word-reveal .w {
+  display: inline-block; opacity: 0; transform: translateY(26px);
+  animation: fade-rise .7s ease-out both;
+  animation-delay: calc(var(--wi) * 90ms + 150ms);
+}
+
+/* altın buton parlaması */
+.btn-gold { position: relative; overflow: hidden; }
+.btn-gold::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 40%;
+  left: -60%; transform: skewX(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent);
+  animation: sheen 4.5s ease-in-out infinite;
+}
+@keyframes sheen {
+  0%, 55% { left: -60%; }
+  75%, 100% { left: 130%; }
+}
+
+/* 3D tilt kartlar */
+.pcard, .svc { transform-style: preserve-3d; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress, .cursor-glow { display: none; }
+  .word-reveal .w { animation: none; opacity: 1; transform: none; }
+  .btn-gold::after { animation: none; }
+}
