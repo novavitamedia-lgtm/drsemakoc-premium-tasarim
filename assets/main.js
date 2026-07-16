@@ -39,3 +39,62 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   items.forEach(function (el) { io.observe(el); });
 })();
+
+/* header: scroll'da koyulaş */
+(function () {
+  var head = document.querySelector('.site-head');
+  if (!head) return;
+  var update = function () {
+    if (window.scrollY > 30) head.classList.add('solid');
+    else head.classList.remove('solid');
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+})();
+
+/* sayaçlar */
+(function () {
+  var els = document.querySelectorAll('[data-count]');
+  if (!els.length) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fmt = function (v, dec) { return dec ? v.toFixed(1).replace('.', ',') : Math.round(v).toString(); };
+  var animate = function (el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    var dec = el.getAttribute('data-count').indexOf('.') > -1;
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduced) { el.textContent = fmt(target, dec) + suffix; return; }
+    var t0 = null, dur = 1600;
+    var tick = function (t) {
+      if (!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / dur);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * p, dec) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (!('IntersectionObserver' in window)) { els.forEach(animate); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { animate(en.target); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.4 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+
+/* video kartları: tıkla → yükle */
+(function () {
+  document.querySelectorAll('.vid-card[data-yt]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var id = card.getAttribute('data-yt');
+      var thumb = card.querySelector('.vid-thumb');
+      if (!thumb || card.querySelector('iframe')) return;
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      f.title = card.querySelector('h3') ? card.querySelector('h3').textContent : 'Video';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true;
+      thumb.replaceWith(f);
+    });
+  });
+})();
