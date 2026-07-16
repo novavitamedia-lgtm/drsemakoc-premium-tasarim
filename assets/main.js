@@ -113,3 +113,14 @@
     });
   });
 })();
+
+/* öncesi/sonrası slider */
+(function () {
+  document.querySelectorAll('.ba-slider').forEach(function (sl) {
+    var range = sl.querySelector('.ba-range');
+    if (!range) return;
+    range.addEventListener('input', function () {
+      sl.style.setProperty('--pos', range.value + '%');
+    });
+  });
+})();

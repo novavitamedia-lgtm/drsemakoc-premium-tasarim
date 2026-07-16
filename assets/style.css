@@ -766,3 +766,68 @@ section { scroll-margin-top: 90px; }
   body:has(.call-bar) .wa-cta { bottom: 5.2rem; }
   body:has(.call-bar) .site-foot { padding-bottom: 4rem; }
 }
+
+/* ===== ZENGİN GÖRSELLEŞTİRME (v8) ===== */
+/* gradyan ikon rozetleri */
+.svc .badge, .travel-item .badge {
+  background: linear-gradient(135deg, #EAD3A0 0%, #C9A567 55%, #A8863D 100%);
+  color: #241B0C;
+  box-shadow: 0 6px 16px rgba(168, 134, 61, .3), inset 0 1px 1px rgba(255, 255, 255, .5);
+}
+
+/* yorumlar: 6'lı grid */
+.rev-cards-grid { grid-template-columns: repeat(2, 1fr); }
+.rev-cards-grid .rev-card { padding: var(--space-4) var(--space-5); }
+.rev-cards-grid .rev-card blockquote { font-size: .88rem; }
+@media (max-width: 800px) { .rev-cards-grid { grid-template-columns: 1fr; } }
+
+/* ana sayfa foto tedavi kartları: 4 kolon */
+.svc-photo { grid-template-columns: repeat(4, 1fr); }
+.svc-photo .pcard h3 { font-size: 1.05rem; }
+.svc-photo .pcard img { aspect-ratio: 4 / 3; }
+.svc-photo .pcard .pbody { padding: var(--space-4); }
+.svc-photo .pcard p { font-size: .84rem; }
+@media (max-width: 1020px) { .svc-photo { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .svc-photo { grid-template-columns: 1fr; } }
+
+/* interaktif öncesi/sonrası slider */
+.ba-duo { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: stretch; }
+@media (max-width: 900px) { .ba-duo { grid-template-columns: 1fr; } }
+.ba-slider {
+  position: relative; border-radius: calc(var(--radius) + 6px); overflow: hidden;
+  border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(11, 11, 12, .14);
+  user-select: none; -webkit-user-select: none;
+}
+.ba-slider img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ba-slider .ba-under { position: relative; }
+.ba-slider .ba-over {
+  position: absolute; inset: 0;
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+.ba-handle {
+  position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px;
+  background: var(--brass-2); transform: translateX(-1px); pointer-events: none;
+}
+.ba-handle span {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 2.6rem; height: 2.6rem; border-radius: 999px; display: grid; place-items: center;
+  background: var(--brass-2); color: var(--ink); box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
+}
+.ba-handle span .ic { width: 1.1em; height: 1.1em; }
+.ba-range {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0; cursor: ew-resize; margin: 0;
+}
+.ba-slider .ba-label { top: 1rem; }
+
+/* klinik galeri şeridi (marquee) */
+.gallery-band { overflow: hidden; background: var(--ink-2); padding-block: var(--space-5); border-block: 1px solid var(--line-dark); }
+.marquee-track { display: flex; gap: var(--space-4); width: max-content; animation: marquee 45s linear infinite; }
+.gallery-band:hover .marquee-track { animation-play-state: paused; }
+.marquee-track img { height: 230px; width: auto; border-radius: 12px; border: 1px solid var(--line-dark); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .gallery-band { overflow-x: auto; }
+}
+@media (max-width: 700px) { .marquee-track img { height: 160px; } }
