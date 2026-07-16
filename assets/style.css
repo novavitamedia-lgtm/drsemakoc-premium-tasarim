@@ -703,3 +703,22 @@ section { scroll-margin-top: 90px; }
 .side-contact a { display: flex; gap: .6rem; align-items: baseline; text-decoration: none; color: var(--text-soft); }
 .side-contact a:hover { color: var(--brass); }
 .side-contact .ic { width: 1em; height: 1em; color: var(--brass); transform: translateY(.12em); }
+
+/* ===== ORTALANMIŞ SİNEMATİK HERO ===== */
+.hero3-center { display: grid; grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 0; }
+.hero3-center h1 { max-width: 15em; margin-top: var(--space-5); }
+.hero3-center .lead { margin-inline: auto; }
+.hero3-center .hero-ctas { justify-content: center; }
+.hero3-center .eyebrow::after { content: ''; width: 2.2rem; height: 1px; background: var(--brass-2); opacity: .7; }
+.hero3 .ov {
+  background:
+    radial-gradient(ellipse 1000px 560px at 50% 110%, rgba(214, 184, 121, .1) 0%, transparent 55%),
+    linear-gradient(to bottom, rgba(8, 8, 9, .5) 0%, rgba(8, 8, 9, .38) 45%, rgba(11, 11, 12, .92) 100%);
+}
+
+/* hakkında portresi */
+.about-photo {
+  width: 100%; border-radius: var(--radius); border: 1px solid var(--line);
+  box-shadow: 0 20px 46px rgba(11, 11, 12, .12); object-fit: cover; aspect-ratio: 5 / 4;
+  object-position: top;
+}
