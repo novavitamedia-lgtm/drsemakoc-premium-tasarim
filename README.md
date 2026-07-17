@@ -8,7 +8,7 @@
 
 - **Palet:** Siyah (#0B0B0C), beyaz (#FCFCFA) ve gold (#A8863D / #D6B879).
 - **Tipografi:** Fraunces (başlıklar) + Figtree (gövde), gömülü woff2.
-- **İkonlar:** [Lucide](https://lucide.dev) (ISC lisansı, ücretsiz), inline SVG.
+- **İkonlar:** [Solar Bold Duotone](https://icon-sets.iconify.design/solar/) (CC BY 4.0) + [Phosphor](https://phosphoricons.com) yedek (MIT), inline SVG.
 - **Görseller:** Canlı drsemakoc.com'dan alınan gerçek klinik ve tedavi görselleri (optimize edilmiş).
 - Açık/koyu tema, erişilebilirlik (focus-visible, reduced-motion), responsive.
 
