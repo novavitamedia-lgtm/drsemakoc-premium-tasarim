@@ -2,7 +2,7 @@
 
 Çok sayfalı statik önizleme sitesi. Onay sonrası tasarım, canlı drsemakoc.com'a (WordPress) taşınacaktır.
 
-**Önizleme:** https://novavitamedia-lgtm.github.io/drsemakoc-premium-tasarim/
+**Önizleme:** https://novavitamedia-lgtm.github.io/drsemakoc-yeni-site/
 
 ## Tasarım
 
