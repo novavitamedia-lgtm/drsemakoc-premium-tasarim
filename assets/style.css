@@ -901,3 +901,29 @@ section { scroll-margin-top: 90px; }
 .rev-btn:hover { background: var(--brass-2); color: var(--ink); transform: translateY(-2px); }
 .rev-btn[data-dir="-1"] .ic { transform: rotate(180deg); }
 .rev-btn .ic { width: 1.1em; height: 1.1em; }
+
+/* ===== YORUM SLIDER LAYOUT FIX (v11) ===== */
+.rev-head {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+  gap: var(--space-5); margin-bottom: var(--space-6);
+}
+.rev-score-inline { display: flex; align-items: center; gap: var(--space-4); }
+.rev-score-inline > b {
+  font-family: var(--ff-display); font-size: clamp(2.6rem, 2rem + 2vw, 3.8rem);
+  font-weight: 500; color: var(--brass-2); line-height: 1; font-variant-numeric: tabular-nums;
+}
+.rev-score-inline .stars .ic { width: 1.05em; height: 1.05em; }
+.rev-score-inline p { font-size: .88rem; color: var(--text-inv-soft); margin-top: .2rem; }
+.rev-score-inline .btn { padding: .7rem 1.2rem; font-size: .88rem; }
+@media (max-width: 700px) { .rev-score-inline { flex-wrap: wrap; } }
+.rev-slider .rev-card { min-width: min(360px, 84vw); max-width: min(360px, 84vw); display: flex; flex-direction: column; }
+.rev-slider .rev-card blockquote { flex: 1; overflow-wrap: anywhere; }
+.rev-card blockquote { overflow-wrap: anywhere; }
+.rev-note { margin-top: var(--space-4); font-size: .76rem; color: var(--text-inv-soft); }
+/* grid çocuklarında taşma önleme */
+.rev-grid > *, .content-grid > *, .about-grid > *, .hero3-in > * { min-width: 0; }
+.rev-slider { width: 100%; max-width: 100%; }
+
+/* BA slider grid oranı */
+.ba-grid .ba-slider { aspect-ratio: 2 / 3; }
+.ba-grid .ba-slider .ba-under { height: 100%; }
