@@ -661,7 +661,7 @@ section { scroll-margin-top: 90px; }
 }
 
 /* ===== HERO VİDEO ===== */
-.hero3 .kbvid { position: absolute; inset: -2%; width: 104%; height: 104%; object-fit: cover; filter: blur(6px) brightness(.8) saturate(.9); }
+.hero3 .kbvid { position: absolute; inset: -2%; width: 104%; height: 104%; object-fit: cover; filter: blur(3px) brightness(.85) saturate(.92); }
 
 /* ===== DİL MENÜSÜ ===== */
 .lang-dd > button { font-size: .85rem; letter-spacing: .04em; }
@@ -980,4 +980,19 @@ section { scroll-margin-top: 90px; }
   .page-hero-in .lead { margin-inline: auto; }
   .page-hero-img { margin-inline: auto; }
   .prose { margin-inline: auto; }
+}
+
+/* ===== BA KAYAN BANT (v14) ===== */
+.ba-band { overflow: hidden; margin-inline: calc(-1 * (100vw - min(1160px, 92vw)) / 2); padding-inline: 0; }
+.ba-track {
+  display: flex; gap: var(--space-4); width: max-content;
+  animation: marquee 38s linear infinite; padding-inline: var(--space-4);
+}
+.ba-band:hover .ba-track { animation-play-state: paused; }
+.ba-track .ba-frame { width: clamp(300px, 34vw, 430px); flex: none; max-width: none; }
+.ba-track .ba-frame img { aspect-ratio: 1 / 1; object-fit: cover; width: 100%; }
+.ba-track .ba-frame.reveal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ba-track { animation: none; }
+  .ba-band { overflow-x: auto; }
 }
