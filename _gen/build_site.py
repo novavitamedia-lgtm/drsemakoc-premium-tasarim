@@ -436,6 +436,45 @@ def rev_cards_html(tags=None, n=6, delay_mod=3):
       <footer><b>{r['name']}</b><span>{r['when']} · Google</span></footer>
     </article>""" for i, r in enumerate(pick_reviews(tags, n)))
 
+GOOGLE_G = '<svg class="gg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>'
+
+TR_STATS = [('20', '+', 'Yıl Hekimlik Deneyimi'), ('4.8', '', 'Google Puanı'),
+            ('529', '', 'Google Yorumu'), ('9', '', 'Uzmanlık Alanı')]
+
+def hero_cards(stats, gtitle, rev_tags=None):
+    """Hero altindaki genis stat bandi yerine yan yana 2 kart:
+       1) Google yorumlari (puan + yildizlar + yorum sayisi + tek yorum onizleme)
+       2) Yil hekimlik deneyimi + uzmanlik alani"""
+    exp, rating, revs, areas = stats[0], stats[1], stats[2], stats[3]
+    r = pick_reviews(rev_tags, 1)[0]
+    stars5 = ''.join(IC['star'] for _ in range(5))
+    txt = ' '.join(r['text'].split())
+    if len(txt) > 96:
+        txt = txt[:96].rsplit(' ', 1)[0] + '…'
+    ini = r['name'].strip()[0].upper()
+    sfx = lambda s: f' data-suffix="{s}"' if s else ''
+    return f'''<div class="hero-cards">
+      <div class="hcard gcard liquid-glass">
+        <div class="gcard-l">
+          <p class="gcard-eyebrow">{gtitle}</p>
+          <div class="grow">{GOOGLE_G}<b data-count="{rating[0]}">0</b><span class="gstars">{stars5}</span></div>
+          <p class="gcount"><b data-count="{revs[0]}">0</b> <span>{revs[2]}</span></p>
+        </div>
+        <div class="gcard-sep" aria-hidden="true"></div>
+        <div class="gcard-r">
+          <div class="rev-av" aria-hidden="true">{ini}</div>
+          <div class="rev-mini">
+            <p class="rev-mn">{r['name']} <span class="gstars sm">{stars5}</span></p>
+            <p class="rev-mt">{txt}</p>
+          </div>
+        </div>
+      </div>
+      <div class="hcard scard liquid-glass">
+        <div class="stat"><b data-count="{exp[0]}"{sfx(exp[1])}>0</b><span>{exp[2]}</span></div>
+        <div class="stat"><b data-count="{areas[0]}"{sfx(areas[1])}>0</b><span>{areas[2]}</span></div>
+      </div>
+    </div>'''
+
 def rev_slider_html(tags=None, n=10):
     stars5 = ''.join(IC['star'] for _ in range(5))
     cards = '\n'.join(
@@ -621,14 +660,7 @@ def home_page():
       </div>
       <p class="hero-note fade-rise-d4">{IC['globe']} Görüşmeler Türkçe, İngilizce, Rusça ve Ukraynaca yapılabilmektedir.</p>
     </div>
-    <div class="wrap hero3-stats fade-rise-d4">
-      <div class="stats-panel liquid-glass">
-        <div class="stat"><b data-count="20" data-suffix="+">0</b><span>Yıl Hekimlik Deneyimi</span></div>
-        <div class="stat"><b data-count="4.8">0</b><span>Google Puanı</span></div>
-        <div class="stat"><b data-count="529">0</b><span>Google Yorumu</span></div>
-        <div class="stat"><b data-count="9">0</b><span>Uzmanlık Alanı</span></div>
-      </div>
-    </div>
+    <div class="wrap hero3-stats fade-rise-d4">{hero_cards(TR_STATS, 'Google Yorumları')}</div>
   </section>
 
   <div class="creds">
@@ -926,6 +958,7 @@ L10N = {
   cta1='Request an Appointment', cta2='Treatments',
   note='Consultations are available in Turkish, English, Russian and Ukrainian.',
   stats=[('20', '+', 'Years of Experience'), ('4.8', '', 'Google Rating'), ('529', '', 'Google Reviews'), ('9', '', 'Areas of Expertise')],
+  gtitle='Google Reviews',
   sec_eyebrow='Areas of Expertise', sec_h2='Diagnosis and treatment services',
   services=['Rhinoplasty', 'Revision Rhinoplasty', 'Ultrasonic Piezo Rhinoplasty', 'Nasal Tip Surgery (Tip Plasty)', 'Septoplasty', 'Snoring and Sleep Apnea', 'Ear and Hearing Surgery', 'Head and Neck Surgery', 'Vertigo (Dizziness)'],
   c_eyebrow='Contact and Appointments', c_h2='Contact us for an examination appointment',
@@ -942,6 +975,7 @@ L10N = {
   cta1='Записаться на приём', cta2='Направления',
   note='Консультации проводятся на турецком, английском, русском и украинском языках.',
   stats=[('20', '+', 'Лет опыта'), ('4.8', '', 'Рейтинг Google'), ('529', '', 'Отзывов в Google'), ('9', '', 'Направлений')],
+  gtitle='Отзывы Google',
   sec_eyebrow='Направления', sec_h2='Диагностика и лечение',
   services=['Ринопластика', 'Ревизионная ринопластика', 'Ультразвуковая пьезо-ринопластика', 'Пластика кончика носа', 'Септопластика', 'Храп и апноэ сна', 'Хирургия уха и слуха', 'Хирургия головы и шеи', 'Вертиго (головокружение)'],
   c_eyebrow='Контакты и запись', c_h2='Свяжитесь с нами для записи на приём',
@@ -958,6 +992,7 @@ L10N = {
   cta1='Записатися на прийом', cta2='Напрямки',
   note='Консультації проводяться турецькою, англійською, російською та українською мовами.',
   stats=[('20', '+', 'Років досвіду'), ('4.8', '', 'Рейтинг Google'), ('529', '', 'Відгуків у Google'), ('9', '', 'Напрямків')],
+  gtitle='Відгуки Google',
   sec_eyebrow='Напрямки', sec_h2='Діагностика та лікування',
   services=['Ринопластика', 'Ревізійна ринопластика', 'Ультразвукова пєзо-ринопластика', 'Пластика кінчика носа', 'Септопластика', 'Хропіння та апное сну', 'Хірургія вуха та слуху', 'Хірургія голови та шиї', 'Вертиго (запаморочення)'],
   c_eyebrow='Контакти та запис', c_h2="Зв'яжіться з нами для запису на прийом",
@@ -1023,9 +1058,7 @@ def lang_page(key):
       </div>
       <p class="hero-note fade-rise-d4">{IC['globe']} {L['note']}</p>
     </div>
-    <div class="wrap hero3-stats fade-rise-d4">
-      <div class="stats-panel liquid-glass">{stats}</div>
-    </div>
+    <div class="wrap hero3-stats fade-rise-d4">{hero_cards(L['stats'], L.get('gtitle', 'Google Reviews'))}</div>
   </section>
   <section class="sec sec-stone" id="services">
     <div class="wrap">

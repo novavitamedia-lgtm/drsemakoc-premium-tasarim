@@ -996,3 +996,47 @@ section { scroll-margin-top: 90px; }
   .ba-track { animation: none; }
   .ba-band { overflow-x: auto; }
 }
+
+/* ===== Hero: iki karta bolunmus stat bandi (Google yorumlari + deneyim) ===== */
+.hero-cards {
+  display: grid; grid-template-columns: 1.5fr 1fr;
+  gap: clamp(.7rem, 1.4vw, 1.1rem);
+}
+.hcard {
+  border-radius: calc(var(--radius) + 4px);
+  padding: clamp(1rem, 1.8vw, 1.5rem) clamp(1rem, 2vw, 1.7rem);
+  background: rgba(11, 11, 12, .5);
+}
+.gcard { display: grid; grid-template-columns: auto 1px 1fr; gap: clamp(.9rem, 1.8vw, 1.6rem); align-items: center; }
+.gcard-eyebrow {
+  font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(242, 239, 230, .55); margin: 0 0 .45rem;
+}
+.grow { display: flex; align-items: center; gap: .5rem; }
+.grow .gg { width: 26px; height: 26px; flex: none; }
+.grow b {
+  font-family: var(--ff-display); font-weight: 500; font-size: clamp(1.5rem, 1.2rem + .9vw, 2rem);
+  color: var(--brass-2); font-variant-numeric: tabular-nums; line-height: 1;
+}
+.gstars { display: inline-flex; gap: 2px; color: #F5B301; }
+.gstars svg { width: 15px; height: 15px; }
+.gstars.sm svg { width: 11px; height: 11px; }
+.gcount { margin: .4rem 0 0; font-size: .78rem; color: rgba(242, 239, 230, .6); }
+.gcount b { font-weight: 600; color: rgba(242, 239, 230, .85); font-variant-numeric: tabular-nums; }
+.gcard-sep { width: 1px; height: 100%; background: rgba(214, 184, 121, .22); }
+.gcard-r { display: flex; gap: .7rem; align-items: flex-start; min-width: 0; }
+.rev-av {
+  width: 34px; height: 34px; border-radius: 50%; flex: none;
+  background: linear-gradient(140deg, var(--brass-2), #A8863D);
+  color: #0B0B0C; display: grid; place-items: center; font-weight: 700; font-size: .9rem;
+}
+.rev-mini { min-width: 0; }
+.rev-mn { margin: 0 0 .2rem; font-size: .84rem; font-weight: 600; color: rgba(242, 239, 230, .92); display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+.rev-mt { margin: 0; font-size: .79rem; line-height: 1.5; color: rgba(242, 239, 230, .62); }
+.scard { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); align-items: center; }
+
+@media (max-width: 900px) {
+  .hero-cards { grid-template-columns: 1fr; }
+  .gcard { grid-template-columns: 1fr; gap: .9rem; }
+  .gcard-sep { width: 100%; height: 1px; }
+}
