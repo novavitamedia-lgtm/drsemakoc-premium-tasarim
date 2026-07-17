@@ -221,3 +221,43 @@
     });
   });
 })();
+
+/* yorum slider: yavaş otomatik kayma (sonsuz döngü, hover'da durur) */
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+  document.querySelectorAll('.rev-slider').forEach(function (sl) {
+    var kids = [].slice.call(sl.children);
+    kids.forEach(function (k) { sl.appendChild(k.cloneNode(true)); });
+    var half = 0, paused = false, idleTimer = null;
+    var calcHalf = function () { half = sl.scrollWidth / 2; };
+    calcHalf();
+    window.addEventListener('resize', calcHalf);
+    var pause = function () {
+      paused = true;
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(function () { paused = false; }, 3500);
+    };
+    ['pointerenter', 'pointerdown', 'touchstart', 'wheel', 'focusin'].forEach(function (ev) {
+      sl.addEventListener(ev, pause, { passive: true });
+    });
+    sl.closest('.rev-slider-wrap').querySelectorAll('.rev-btn').forEach(function (b) {
+      b.addEventListener('click', pause);
+    });
+    var pos = sl.scrollLeft;
+    ['pointerdown', 'wheel', 'touchstart'].forEach(function (ev) {
+      sl.addEventListener(ev, function () { pos = sl.scrollLeft; }, { passive: true });
+    });
+    var tick = function () {
+      if (!paused) {
+        pos += 0.5;
+        if (half > 0 && pos >= half) pos -= half;
+        sl.scrollLeft = pos;
+      } else {
+        pos = sl.scrollLeft;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+})();
