@@ -442,33 +442,32 @@ TR_STATS = [('20', '+', 'Yıl Hekimlik Deneyimi'), ('4.8', '', 'Google Puanı'),
             ('529', '', 'Google Yorumu'), ('9', '', 'Uzmanlık Alanı')]
 
 def hero_cards(stats, gtitle, rev_tags=None):
-    """Hero altindaki genis stat bandi yerine yan yana 2 kart:
-       1) Google yorumlari (puan + yildizlar + yorum sayisi + tek yorum onizleme)
+    """Hero altinda yan yana 2 kart:
+       1) Google yorumlari — tiklaninca Google profiline gider; icinde birkac yorum surekli doner
        2) Yil hekimlik deneyimi + uzmanlik alani"""
     exp, rating, revs, areas = stats[0], stats[1], stats[2], stats[3]
-    r = pick_reviews(rev_tags, 1)[0]
     stars5 = ''.join(IC['star'] for _ in range(5))
-    txt = ' '.join(r['text'].split())
-    if len(txt) > 96:
-        txt = txt[:96].rsplit(' ', 1)[0] + '…'
-    ini = r['name'].strip()[0].upper()
+    def short(t):
+        t = ' '.join(t.split())
+        return t[:92].rsplit(' ', 1)[0] + '…' if len(t) > 92 else t
+    slides = ''
+    for j, rv in enumerate(pick_reviews(rev_tags, 5)):
+        ini = rv['name'].strip()[0].upper()
+        slides += (f'<div class="rev-slide{" on" if j == 0 else ""}">'
+                   f'<div class="rev-av" aria-hidden="true">{ini}</div>'
+                   f'<div class="rev-mini"><p class="rev-mn">{rv["name"]} <span class="gstars sm">{stars5}</span></p>'
+                   f'<p class="rev-mt">{short(rv["text"])}</p></div></div>')
     sfx = lambda s: f' data-suffix="{s}"' if s else ''
     return f'''<div class="hero-cards">
-      <div class="hcard gcard liquid-glass">
+      <a href="{MAPS_URL}" target="_blank" rel="noopener" class="hcard gcard liquid-glass" aria-label="Google yorumlarını görüntüle">
         <div class="gcard-l">
           <p class="gcard-eyebrow">{gtitle}</p>
           <div class="grow">{GOOGLE_G}<b data-count="{rating[0]}">0</b><span class="gstars">{stars5}</span></div>
           <p class="gcount"><b data-count="{revs[0]}">0</b> <span>{revs[2]}</span></p>
         </div>
         <div class="gcard-sep" aria-hidden="true"></div>
-        <div class="gcard-r">
-          <div class="rev-av" aria-hidden="true">{ini}</div>
-          <div class="rev-mini">
-            <p class="rev-mn">{r['name']} <span class="gstars sm">{stars5}</span></p>
-            <p class="rev-mt">{txt}</p>
-          </div>
-        </div>
-      </div>
+        <div class="gcard-r rev-slot">{slides}</div>
+      </a>
       <div class="hcard scard liquid-glass">
         <div class="stat"><b data-count="{exp[0]}"{sfx(exp[1])}>0</b><span>{exp[2]}</span></div>
         <div class="stat"><b data-count="{areas[0]}"{sfx(areas[1])}>0</b><span>{areas[2]}</span></div>

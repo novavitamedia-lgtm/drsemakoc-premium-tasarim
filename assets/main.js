@@ -261,3 +261,17 @@
     requestAnimationFrame(tick);
   });
 })();
+
+/* Hero Google kartı: yorumları sırayla döndür */
+(function () {
+  document.querySelectorAll('.rev-slot').forEach(function (slot) {
+    var slides = slot.querySelectorAll('.rev-slide');
+    if (slides.length < 2) return;
+    var i = 0;
+    setInterval(function () {
+      slides[i].classList.remove('on');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('on');
+    }, 4000);
+  });
+})();
