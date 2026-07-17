@@ -207,3 +207,17 @@
     });
   }
 })();
+
+/* yorum slider okları */
+(function () {
+  document.querySelectorAll('.rev-slider-wrap').forEach(function (wrap) {
+    var sl = wrap.querySelector('.rev-slider');
+    wrap.querySelectorAll('.rev-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var card = sl.querySelector('.rev-card');
+        var w = card ? card.getBoundingClientRect().width + 16 : 350;
+        sl.scrollBy({ left: w * parseInt(btn.getAttribute('data-dir'), 10), behavior: 'smooth' });
+      });
+    });
+  });
+})();
