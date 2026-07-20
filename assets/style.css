@@ -1063,3 +1063,52 @@ a.gcard:hover .grow b { color: #F5D592; }
 .contact-split .lp-form { width: 100%; max-width: none; }
 .contact-split .contact-cards { grid-template-columns: 1fr 1fr; align-content: start; }
 @media (max-width: 900px) { .contact-split { grid-template-columns: 1fr; } }
+
+/* ===== BÖLÜM RİTMİ: SICAK BEJ AÇIK ZEMİN (v15) ===== */
+:root { --sand: #F3EEE3; --sand-card: #FBF8F1; --sand-line: #E4DBC9; }
+@media (prefers-color-scheme: dark) { :root { --sand: #15130F; --sand-card: #1C1915; --sand-line: #2E2A22; } }
+
+.sec-sand { background: var(--sand); color: var(--text); }
+.sec-sand .eyebrow { color: var(--brass); }
+.sec-sand .eyebrow::before { background: var(--brass); }
+.sec-sand h2, .sec-sand h3, .sec-sand .card-t, .sec-sand .rev-head h2 { color: var(--text); }
+
+/* yorumlar açık bej zeminde: kartlar açık */
+.sec-sand .rev-card {
+  background: var(--sand-card); border: 1px solid var(--sand-line);
+  box-shadow: 0 8px 24px rgba(11, 11, 12, .05);
+}
+.sec-sand .rev-card blockquote { color: var(--text); }
+.sec-sand .rev-card footer { color: var(--text-soft); }
+.sec-sand .rev-card footer b { color: var(--text); }
+.sec-sand .rev-score-inline b { color: var(--brass); }
+.sec-sand .rev-score-inline p { color: var(--text-soft); }
+.sec-sand .rev-note { color: var(--text-soft); }
+.sec-sand .rev-btn {
+  background: var(--sand-card); border: 1px solid var(--sand-line); color: var(--text);
+}
+.sec-sand .rev-btn:hover { background: var(--brass-2); color: var(--ink); }
+
+/* randevu formu açık bej zeminde */
+.sec-sand .lp-form-wrap h2 { color: var(--text); }
+.sec-sand .lp-form-wrap > p { color: var(--text-soft) !important; }
+.sec-sand .lp-form .lead-form {
+  background: var(--sand-card); border: 1px solid var(--sand-line);
+}
+.sec-sand .lp-form .lead-form .lf-head, .sec-sand .lp-form .lead-form > p { color: var(--text); }
+.sec-sand .lp-form .lead-form > p { color: var(--text-soft); }
+.sec-sand .lp-form .wa-form input, .sec-sand .lp-form .wa-form select {
+  background: var(--ivory); border-color: var(--sand-line); color: var(--text);
+}
+.sec-sand .lp-form .wa-form input::placeholder { color: var(--text-soft); }
+.sec-sand .lp-form .lead-form small { color: var(--text-soft); }
+.sec-sand .btn-ghost { border-color: var(--sand-line); color: var(--text); }
+
+/* hekim bölümü açık bej: portre çerçevesi */
+.sec-sand .about-photo { border-color: var(--sand-line); }
+
+/* SÜREÇ bölümü koyu zeminde (dark-sec .steps) */
+.dark-sec .step h3 { color: var(--text-inv); }
+.dark-sec .step p { color: var(--text-inv-soft); }
+.dark-sec .sec-head h2 { color: var(--text-inv); }
+.dark-sec .sec-head p { color: var(--text-inv-soft); }
