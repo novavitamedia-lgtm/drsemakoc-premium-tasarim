@@ -922,18 +922,18 @@ def contact_page():
   <section class="sec dark-sec" style="padding-top: clamp(2.8rem, 5.5vw, 4.5rem);">
     <div class="wrap">
       <nav class="breadcrumb reveal" aria-label="breadcrumb" style="margin-bottom: var(--space-6);"><a href="{R}index.html">Ana Sayfa</a> {IC['chevron-right']} <b>İletişim</b></nav>
-      <div class="contact-grid">
-        <div>
-          <p class="eyebrow reveal">İletişim ve Randevu</p>
-          <h2 class="reveal reveal-d1">Muayene randevusu için bize ulaşın</h2>
-          <p class="intro reveal reveal-d2">Randevu oluşturmak veya bilgi almak için telefon, e-posta ya da sosyal medya kanallarından ulaşabilirsiniz. Görüşmeler Türkçe, İngilizce, Rusça ve Ukraynaca yapılabilmektedir.</p>
-          <div class="socials reveal reveal-d3">
-            <a href="https://www.instagram.com/drsemakoc/" target="_blank" rel="noopener" aria-label="Instagram">{IC['instagram']}</a>
-            <a href="https://www.facebook.com/doc.dr.SemaKoc" target="_blank" rel="noopener" aria-label="Facebook">{IC['facebook']}</a>
-            <a href="{WA}" target="_blank" rel="noopener" aria-label="WhatsApp">{IC['message-circle']}</a>
-          </div>
-          <div class="lp-form reveal reveal-d3" style="margin-top: var(--space-6);">{wa_form('Hızlı Randevu Talebi', 'Genel Bilgi ve Randevu', subject_select=True)}</div>
+      <div class="contact-head">
+        <p class="eyebrow reveal">İletişim ve Randevu</p>
+        <h2 class="reveal reveal-d1">Muayene randevusu için bize ulaşın</h2>
+        <p class="intro reveal reveal-d2">Randevu oluşturmak veya bilgi almak için telefon, e-posta ya da sosyal medya kanallarından ulaşabilirsiniz. Görüşmeler Türkçe, İngilizce, Rusça ve Ukraynaca yapılabilmektedir.</p>
+        <div class="socials reveal reveal-d3">
+          <a href="https://www.instagram.com/drsemakoc/" target="_blank" rel="noopener" aria-label="Instagram">{IC['instagram']}</a>
+          <a href="https://www.facebook.com/doc.dr.SemaKoc" target="_blank" rel="noopener" aria-label="Facebook">{IC['facebook']}</a>
+          <a href="{WA}" target="_blank" rel="noopener" aria-label="WhatsApp">{IC['message-circle']}</a>
         </div>
+      </div>
+      <div class="contact-split">
+        <div class="lp-form reveal">{wa_form('Hızlı Randevu Talebi', 'Genel Bilgi ve Randevu', subject_select=True)}</div>
         <div class="contact-cards">
           <div class="ccard reveal">{IC['map-pin']}<b>Adres</b><p>Tekelioğlu Cad. 1947. Sk. No: 29/3<br>Muratpaşa / Antalya</p><a class="maplink" href="{MAPQ}" target="_blank" rel="noopener">Haritada Görüntüle {IC['arrow-up-right']}</a></div>
           <div class="ccard reveal reveal-d1">{IC['phone']}<b>Telefon</b><a href="{TEL}">{PHONE}</a></div>
