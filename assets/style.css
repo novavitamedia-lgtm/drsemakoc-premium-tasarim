@@ -1112,3 +1112,6 @@ a.gcard:hover .grow b { color: #F5D592; }
 .dark-sec .step p { color: var(--text-inv-soft); }
 .dark-sec .sec-head h2 { color: var(--text-inv); }
 .dark-sec .sec-head p { color: var(--text-inv-soft); }
+
+/* vertigo hero cihaz vurgusu */
+.lead-emph { display: block; color: var(--brass-2); font-weight: 600; margin-bottom: .55rem; }
