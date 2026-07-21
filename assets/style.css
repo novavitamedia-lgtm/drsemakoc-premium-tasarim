@@ -1115,3 +1115,12 @@ a.gcard:hover .grow b { color: #F5D592; }
 
 /* vertigo hero cihaz vurgusu */
 .lead-emph { display: block; color: var(--brass-2); font-weight: 600; margin-bottom: .55rem; }
+
+/* vertigo: cihaz vurgu şeridi (en başta, kalın) */
+.device-banner {
+  font-size: clamp(1.05rem, .96rem + .5vw, 1.4rem);
+  font-weight: 700; color: var(--brass-2); line-height: 1.4;
+  max-width: 26em; margin: 0 auto var(--space-4);
+  text-wrap: balance;
+}
+.device-banner + .lp-badge { margin-top: 0; }
