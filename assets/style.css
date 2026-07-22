@@ -1128,3 +1128,24 @@ a.gcard:hover .grow b { color: #F5D592; }
 /* öncesi/sonrası etiket renk semantiği (konumdan bağımsız) */
 .ba-label.is-after { color: var(--brass-2); }
 .ba-label.is-before { color: #fff; }
+
+/* ===== SSS + VİDEO İKİ SÜTUN (v25) ===== */
+.faq-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+.faq-grid > .faq { max-width: none; }
+@media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
+.faq-videos { display: grid; gap: var(--space-3); }
+.faq-videos-t {
+  font-size: .74rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--brass); margin-bottom: .2rem;
+}
+.faq-videos .vid-card { width: 100%; }
+.faq-videos .vid-card .card-t { font-size: .9rem; padding: var(--space-3) var(--space-4); }
+.faq-videos-more {
+  font-size: .86rem; font-weight: 600; color: var(--brass); text-decoration: none;
+  display: inline-block; margin-top: .2rem;
+}
+.faq-videos-more:hover { text-decoration: underline; }
+.dark-sec .faq-videos-t, .dark-sec .faq-videos-more { color: var(--brass-2); }
+
+/* video thumb: 16:9 oranı zorla (span inline olduğu için aspect-ratio uygulanmıyordu) */
+.vid-thumb { display: block; }
