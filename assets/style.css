@@ -1124,3 +1124,7 @@ a.gcard:hover .grow b { color: #F5D592; }
   text-wrap: balance;
 }
 .device-banner + .lp-badge { margin-top: 0; }
+
+/* öncesi/sonrası etiket renk semantiği (konumdan bağımsız) */
+.ba-label.is-after { color: var(--brass-2); }
+.ba-label.is-before { color: #fff; }
